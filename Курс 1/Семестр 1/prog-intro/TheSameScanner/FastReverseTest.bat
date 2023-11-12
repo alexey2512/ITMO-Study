@@ -1,0 +1,1 @@
+java -ea -jar FastReverseTest.jar MinC
