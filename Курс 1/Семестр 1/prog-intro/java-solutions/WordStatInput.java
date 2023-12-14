@@ -1,11 +1,10 @@
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class WordStatInput {
-
-    public static boolean isWordSymbol(char sym) {
+    
+    public static  boolean isWordSymbol(char sym) {
         return (Character.isLetter(sym) ||
                 Character.getType(sym) == Character.DASH_PUNCTUATION ||
                 sym == '\'');

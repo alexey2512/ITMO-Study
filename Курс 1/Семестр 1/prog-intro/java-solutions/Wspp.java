@@ -5,12 +5,12 @@ import java.util.LinkedHashMap;
 class TrueSameScanner {
 
     private final Reader inputStream;
-    private final StringBuilder hashedNext = new StringBuilder();
-    private final char[] buffer = new char[1 << 10];
     private int currentIndex, bufferLength;
     private boolean isAvailable = true;
     private boolean hasNextIsUsed = false;
     private boolean hasNextBool = true;
+    private final StringBuilder hashedNext = new StringBuilder();
+    private final char[] buffer = new char[1 << 10];
 
     public TrueSameScanner(File in, String encoding) throws IOException {
         inputStream = new InputStreamReader(new FileInputStream(in), encoding);
@@ -34,9 +34,7 @@ class TrueSameScanner {
 
     private boolean isSpace(char c) {
         return (Character.isWhitespace(c) ||
-                Character.isSpaceChar(c) ||
-                c == '\n' ||
-                Character.getType(c) == Character.LINE_SEPARATOR);
+                Character.isSpaceChar(c));
     }
 
     public String next() throws IOException {
@@ -74,6 +72,7 @@ class TrueSameScanner {
     }
 
 }
+
 
 
 class IntList {
@@ -118,6 +117,7 @@ class IntList {
         return lastIndex + 1;
     }
 }
+
 
 
 public class Wspp {
@@ -179,8 +179,7 @@ public class Wspp {
 
                 } catch (IOException e) {
                     System.err.println("Input-output exception: " + e.getMessage());
-                }
-                bw.close();
+                } bw.close();
 
             } catch (IOException e) {
                 System.err.println("Input-output exception: " + e.getMessage());

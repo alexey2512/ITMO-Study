@@ -11,7 +11,15 @@ public class TheSameScanner {
     private boolean isAvailable = true;
     private boolean hasNextIsUsed = false, hasNextLineIsUsed = false;
     private boolean hasNextBool = true, hasNextLineBool = true;
+    private final char lineSeparator;
 
+    {
+        if (System.lineSeparator().equals("\r")) {
+            lineSeparator = '\r';
+        } else {
+            lineSeparator = '\n';
+        }
+    }
 
     public TheSameScanner(InputStream in, String encoding) throws IOException {
         inputStream = new InputStreamReader(in, encoding);
@@ -45,9 +53,7 @@ public class TheSameScanner {
 
     private boolean isSpace(char c) {
         return (Character.isWhitespace(c) ||
-                Character.isSpaceChar(c) ||
-                c == '\n' ||
-                Character.getType(buffer[currentIndex]) == Character.LINE_SEPARATOR);
+                Character.isSpaceChar(c));
     }
 
     public String nextLine() throws IOException {
@@ -56,8 +62,7 @@ public class TheSameScanner {
             return hashedNextLine.toString();
         } else {
             StringBuilder line = new StringBuilder();
-            while (isAvailable && buffer[currentIndex] != '\n' &&
-                   Character.getType(buffer[currentIndex]) != Character.LINE_SEPARATOR) {
+            while (isAvailable && buffer[currentIndex] != lineSeparator) {
                 line.append(buffer[currentIndex]);
                 moveIndex();
             }

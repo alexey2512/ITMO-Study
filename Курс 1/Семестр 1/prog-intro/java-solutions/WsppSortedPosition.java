@@ -5,13 +5,22 @@ import java.util.*;
 class SameScanner {
 
     private final Reader inputStream;
-    private final StringBuilder hashedNextWord = new StringBuilder();
-    private final char[] buffer = new char[1 << 10];
     private int currentIndex, bufferLength, countOfLines = 1;
     private boolean isAvailable = true;
     private boolean hasNextWordIsUsed = false;
     private boolean hasNextWordBool = true;
     private int afterHasNextWord;
+    private final StringBuilder hashedNextWord = new StringBuilder();
+    private final char[] buffer = new char[1 << 10];
+    private final char lineSeparator;
+
+    {
+        if (System.lineSeparator().equals("\r")) {
+            lineSeparator = '\r';
+        } else {
+            lineSeparator = '\n';
+        }
+    }
 
 
     public SameScanner(Reader rd) throws IOException {
@@ -32,8 +41,7 @@ class SameScanner {
         if (currentIndex == bufferLength) {
             readNextBuffer();
         }
-        if (isAvailable && (buffer[currentIndex] == '\n'
-                            || Character.getType(buffer[currentIndex]) == Character.LINE_SEPARATOR)) {
+        if (isAvailable && buffer[currentIndex] == lineSeparator) {
             countOfLines++;
         }
     }
@@ -94,6 +102,7 @@ class SameScanner {
 }
 
 
+
 class Pair {
 
     private final int first;
@@ -130,8 +139,8 @@ class Pair {
 
 class PairIntList {
 
-    private final List<Pair> pairs;
     private int length = 0;
+    private final List<Pair> pairs;
 
     public PairIntList() {
         pairs = new ArrayList<>();
@@ -161,6 +170,7 @@ class PairIntList {
         return length;
     }
 }
+
 
 
 public class WsppSortedPosition {
@@ -200,7 +210,7 @@ public class WsppSortedPosition {
 
                     if (br.getCountOfLines() > numberOfLine || !br.hasNextWord()) {
 
-                        for (Map.Entry<String, PairIntList> entry : dict.entrySet()) {
+                        for (Map.Entry<String, PairIntList> entry: dict.entrySet()) {
 
                             PairIntList val = entry.getValue();
                             iter = val.getLength() - 1;
@@ -234,6 +244,7 @@ public class WsppSortedPosition {
                         )
                 );
                 try {
+
                     for (String key : keys) {
                         if (!key.isEmpty()) {
                             bw.write(key + " " + dict.get(key).getLength() + " " + dict.get(key).joinToString() + "\n");
@@ -242,8 +253,7 @@ public class WsppSortedPosition {
 
                 } catch (IOException e) {
                     System.err.println("Input-output exception: " + e.getMessage());
-                }
-                bw.close();
+                } bw.close();
 
             } catch (IOException e) {
                 System.err.println("Input-output exception: " + e.getMessage());

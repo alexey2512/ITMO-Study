@@ -1,5 +1,5 @@
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.*;
 
 public class Reverse {
     public static void main(String[] args) {

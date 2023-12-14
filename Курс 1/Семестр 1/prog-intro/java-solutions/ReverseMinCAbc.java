@@ -13,7 +13,7 @@ public class ReverseMinCAbc {
         }
         if (num > 0) {
             return ans.reverse().toString();
-        } else if (num < 0) {
+        } else if (num < 0){
             return "-" + ans.reverse();
         } else {
             return "a";
@@ -32,18 +32,17 @@ public class ReverseMinCAbc {
 
             //matrix input
             while (sc_global.hasNextLine()) {
-                TheSameScanner sc_local = new TheSameScanner(sc_global.nextLine());
-                len_local = 0;
-                while (sc_local.hasNextInt()) {
-                    el = sc_local.nextAbc();
-                    arr_local[len_local] = el;
-                    len_local++;
-                }
-                arr_global[len_global] = Arrays.copyOfRange(arr_local, 0, len_local);
-                if (len_local > max_len_local) {
-                    max_len_local = len_local;
-                }
-                len_global++;
+                    TheSameScanner sc_local = new TheSameScanner(sc_global.nextLine());
+                    len_local = 0;
+                    while (sc_local.hasNextInt()) {
+                        el = sc_local.nextAbc();
+                        arr_local[len_local] = el;
+                        len_local++;
+                    }
+                    arr_global[len_global] = Arrays.copyOfRange(arr_local, 0, len_local);
+                    if (len_local > max_len_local)
+                    {max_len_local = len_local;}
+                    len_global++;
 
             }
 

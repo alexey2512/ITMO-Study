@@ -1,11 +1,10 @@
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.LinkedHashMap;
-import java.util.Set;
+import java.util.*;
 
 public class WordStatCount {
 
-    public static boolean isWordSymbol(char sym) {
+    public static  boolean isWordSymbol(char sym) {
         return (Character.isLetter(sym) ||
                 Character.getType(sym) == Character.DASH_PUNCTUATION ||
                 sym == '\'');
@@ -52,7 +51,7 @@ public class WordStatCount {
                 try (BufferedWriter bw = new BufferedWriter(
                         new OutputStreamWriter(
                                 new FileOutputStream(
-                                        new File(args[1])
+                                        args[1]
                                 ), StandardCharsets.UTF_8
                         )
                 )) {
