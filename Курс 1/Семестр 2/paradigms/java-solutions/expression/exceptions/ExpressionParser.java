@@ -41,7 +41,7 @@ public class ExpressionParser extends BaseParser implements TripleParser, ListPa
         return parse();
     }
 
-    private CommonExpression parse() {
+    private CommonExpression parse() throws Exception {
         CommonExpression answer = parseBitOr();
         skipWhitespaces();
         if (isClosingParen()) {
@@ -56,7 +56,7 @@ public class ExpressionParser extends BaseParser implements TripleParser, ListPa
         return answer;
     }
 
-    private CommonExpression parseBitOr() {
+    private CommonExpression parseBitOr() throws Exception {
         curBinOp = END;
         curUnOp = END;
         CommonExpression temp = parseBitXor();
@@ -71,7 +71,7 @@ public class ExpressionParser extends BaseParser implements TripleParser, ListPa
         }
     }
 
-    private CommonExpression parseBitXor() {
+    private CommonExpression parseBitXor() throws Exception {
         CommonExpression temp = parseBitAnd();
         while (true) {
             if (take('^')) {
@@ -84,7 +84,7 @@ public class ExpressionParser extends BaseParser implements TripleParser, ListPa
         }
     }
 
-    private CommonExpression parseBitAnd() {
+    private CommonExpression parseBitAnd() throws Exception {
         CommonExpression temp = parseAddSubtract();
         while (true) {
             if (take('&')) {
@@ -97,7 +97,7 @@ public class ExpressionParser extends BaseParser implements TripleParser, ListPa
         }
     }
 
-    private CommonExpression parseAddSubtract() {
+    private CommonExpression parseAddSubtract() throws Exception {
         CommonExpression temp = parseMultiplyDivide();
         while (true) {
             if (take('+')) {
@@ -114,7 +114,7 @@ public class ExpressionParser extends BaseParser implements TripleParser, ListPa
         }
     }
 
-    private CommonExpression parseMultiplyDivide() {
+    private CommonExpression parseMultiplyDivide() throws Exception {
         skipWhitespaces();
         CommonExpression temp = parseFirstPriority();
         skipWhitespaces();
@@ -137,7 +137,7 @@ public class ExpressionParser extends BaseParser implements TripleParser, ListPa
         }
     }
 
-    private CommonExpression parseFirstPriority() {
+    private CommonExpression parseFirstPriority() throws Exception {
         CommonExpression temp;
         if (take('-')) {
             curUnOp = '-';
@@ -177,7 +177,7 @@ public class ExpressionParser extends BaseParser implements TripleParser, ListPa
         }
     }
 
-    private CommonExpression parseUnary(char taken, String expected, boolean spaceAfter) {
+    private CommonExpression parseUnary(char taken, String expected, boolean spaceAfter) throws Exception {
         curUnOp = taken;
         try {
             expect(expected);
@@ -193,7 +193,7 @@ public class ExpressionParser extends BaseParser implements TripleParser, ListPa
         return temp;
     }
 
-    private CommonExpression parseVarConst(String prefix) {
+    private CommonExpression parseVarConst(String prefix) throws Exception {
         StringBuilder sb = new StringBuilder();
         if (between('0', '9')) {
             sb.append(prefix);
@@ -204,7 +204,7 @@ public class ExpressionParser extends BaseParser implements TripleParser, ListPa
                 int num = Integer.parseInt(sb.toString());
                 return new Const(num);
             } catch (NumberFormatException e) {
-                throw new OverflowException("overflow in constant " + sb);
+                throw new NonParsingConstantException("overflow in constant " + sb);
             }
         } else if (VariablesController.isBeginOfVariable(getCurrentChar())) {
             while (!isPrimitiveOperation() && !eof() && !Character.isWhitespace(getCurrentChar())
@@ -264,7 +264,7 @@ public class ExpressionParser extends BaseParser implements TripleParser, ListPa
 
 
 
-    private RuntimeException closPar(char paren) {
+    private Exception closPar(char paren) throws Exception {
         if (eof()) {
             throw new IncorrectBracketSequenceException("no paired closing parenthesis found for '" + paren + "'" + " at position: " + getPos());
         } else if (isPrimitiveOperation()) {
@@ -286,7 +286,7 @@ public class ExpressionParser extends BaseParser implements TripleParser, ListPa
         return new MissingArgumentException("missing" + argNum + "operand for operation '" + op + "'" + " at position: " + getPos());
     }
 
-    private RuntimeException lostSym(char sym) {
+    private Exception lostSym(char sym) {
         if (isOpeningParen()) {
             return new IncorrectBracketSequenceException("unexpected opening bracket '" + sym + "' found" + " at position: " + getPos());
         } else if (isClosingParen()) {
@@ -317,7 +317,6 @@ public class ExpressionParser extends BaseParser implements TripleParser, ListPa
         public static String get(int index) {
             return variables.get(index);
         }
-
         public static int indexOf(String variable) {
             return variables.indexOf(variable);
         }
@@ -325,7 +324,6 @@ public class ExpressionParser extends BaseParser implements TripleParser, ListPa
         public static int size() {
             return variables.size();
         }
-
         public static boolean isBeginOfVariable(Character ch) {
             return firsts.contains(ch);
         }

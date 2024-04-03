@@ -1,5 +1,7 @@
 package expression;
 
+import expression.exceptions.OverflowException;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -38,7 +40,7 @@ public abstract class BinaryOperation extends CommonExpression {
         return right;
     }
 
-    protected abstract int calculate(int a, int b);
+    protected abstract int calculate(int a, int b) throws OverflowException;
 
     @Override
     public int evaluate(int x) {

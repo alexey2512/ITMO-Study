@@ -1,5 +1,6 @@
 package search;
 
+// :NOTE: Стоило использовать оформление с лекции
 /* Перед командой указаны условия, которые необходимы для выполнения команды,
  *  и те, которые меняются после её выполнения. После команды указаны условия,
  *  которые появились или изменились после выполнения команды. При этом понимается,
@@ -8,10 +9,12 @@ package search;
 public class BinarySearch {
 
     // Pred:
+    // :NOTE: length? length = len(array) - 1
     // array[0] >= array[1] >= ... >= array[length]
     // len(array) >= 2
     // array[0] > number
     // array[len(array) - 1] <= number
+    // :NOTE: nulls?
     public static int iterativeSearch(int[] array, int number) {
 
         // array[0] > number
@@ -168,6 +171,7 @@ public class BinarySearch {
 
 
     // Pred:
+    // :NOTE: use math language + integer intervals
     // args contains integer strings
     // args contains at least one string
     // int(args1[1]) >= ... >= int(args[len(args) - 1]   -   элементы поступающего массива
