@@ -119,6 +119,10 @@ const parse = (expr) => {
 
 const parsePrefix = (expression) => {
 
+    if (expression === '') {
+        throw new EmptyExpressionError("got empty expression: ''");
+    }
+
     let index = 0;
     let cur = expression[index];
     let eof = '\0';
@@ -159,7 +163,7 @@ const parsePrefix = (expression) => {
 
     const multiArgument = (condition) => {
         let result = [];
-        for (let i = 0; condition(i); i++) {
+        for (let i = 0; condition(i) && !test(eof); i++) {
             result.push(sift());
             skipWhitespaces();
         }
@@ -169,7 +173,7 @@ const parsePrefix = (expression) => {
     const parse = () => {
         skipWhitespaces();
         if (test(eof)) {
-            throw new EmptyExpressionError("got empty expression: " + expression);
+            throw new EmptyExpressionError("got empty expression: '" + expression + "'");
         }
         let result = sift();
         skipWhitespaces();
