@@ -3,4 +3,4 @@ project(algosLab_s3)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(algosLab_s3 OneH.cpp)
+add_executable(algosLab_s3 FiveE.cpp)
