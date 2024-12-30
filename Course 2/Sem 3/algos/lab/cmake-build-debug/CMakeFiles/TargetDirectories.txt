@@ -1,3 +1,0 @@
-/Users/alexeystepurin/Desktop/ITMO-Study/Course 2/Sem 3/algos/lab/cmake-build-debug/CMakeFiles/algosLab_s3.dir
-/Users/alexeystepurin/Desktop/ITMO-Study/Course 2/Sem 3/algos/lab/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/alexeystepurin/Desktop/ITMO-Study/Course 2/Sem 3/algos/lab/cmake-build-debug/CMakeFiles/rebuild_cache.dir
