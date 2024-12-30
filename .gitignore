@@ -1,2 +1,22 @@
-cmake-build-debug
+# Игнорировать все каталоги сборки
+**/build/
+**/dist/
+**/out/
+**/bin/
+**/obj/
+
+# Игнорировать временные файлы IDE
+.idea/
+.vscode/
+
+# macOS системные файлы
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Игнорировать скрытые файлы IDE
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
 
