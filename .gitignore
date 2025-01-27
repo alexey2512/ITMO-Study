@@ -7,6 +7,7 @@
 
 # Игнорировать временные файлы IDE
 .idea/
+.bsp/
 .vscode/
 
 # macOS системные файлы
@@ -19,4 +20,4 @@
 *.user
 *.userosscache
 *.sln.docstates
-
+target/
